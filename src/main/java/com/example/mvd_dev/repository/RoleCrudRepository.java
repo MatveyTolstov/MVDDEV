@@ -12,7 +12,7 @@ import java.util.Optional;
  * Репозиторий представляющий методы для работы с ролью
  */
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleCrudRepository extends JpaRepository<Role, Long> {
 
     /**
      * Нахождение роли по названию
@@ -22,6 +22,13 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
     Role findByRoleName(String roleName);
 
     /**
+     * Нахождение роли по id
+     * @param id
+     * @return Role
+     */
+    Role findByIdRole(long id);
+
+    /**
      * Сохранение роли в систему
      * @param role
      * @return Role
@@ -29,22 +36,16 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
     Role save(Role role);
 
     /**
-     * Нахождение роли по id
-     * @param id
-     * @return Role
-     */
-    Role findById(int id);
-
-    /**
      * Удаление роли
      * @param id
      */
-    void delete(int id);
+    void deleteRoleByIdRole(long id);
+
 
     /**
-     * Изменение роли
-     * @param role
-     * @return Role
+     * Получения всех ролей
+     * @return List Role
      */
-    Role update(Role role);
+    @Override
+    List<Role> findAll();
 }
