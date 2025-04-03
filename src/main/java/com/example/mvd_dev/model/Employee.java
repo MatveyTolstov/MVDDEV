@@ -14,14 +14,15 @@ public class Employee extends UserFIO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_employee") // Изменено на snake_case
     private long idEmployee;
 
     @ManyToOne
-    @JoinColumn(name = "departmentId", referencedColumnName = "idDepartment", nullable = false)
+    @JoinColumn(name = "department_id", referencedColumnName = "id_department", nullable = false) // Изменено на snake_case
     private Department department;
 
     @OneToOne
-    @JoinColumn(name = "userId", referencedColumnName = "idUser ", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id_user", nullable = false) // Изменено на snake_case
     private User user;
 
     // Вы можете добавить дополнительные поля и методы, если необходимо

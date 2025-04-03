@@ -11,24 +11,25 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idUser;
+    @Column(name = "id_user") // Изменено на snake_case
+    private long idUser ;
 
+    @Column(name = "number") // Изменено на snake_case
     private String number;
 
+    @Column(name = "password") // Изменено на snake_case
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "roleID", referencedColumnName = "idRole")
+    @JoinColumn(name = "role_id", referencedColumnName = "id_role") // Изменено на snake_case
     private Role role;
 
-    public long getRoleId(){
+    public long getRoleId() {
         return role != null ? role.getIdRole() : -1;
     }
-
 }
