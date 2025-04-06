@@ -2,6 +2,7 @@ package com.example.mvd_dev.repository;
 
 import com.example.mvd_dev.model.DocumentType;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -12,5 +13,6 @@ import java.util.Optional;
 @Repository
 public interface DocumentTypeRepository extends JpaRepository<DocumentType, Long> {
 
+    @Query("SELECT d FROM DocumentType d WHERE d.documentType = :documentType")
     Optional<DocumentType> findByDocumentType(String documentType);
 }

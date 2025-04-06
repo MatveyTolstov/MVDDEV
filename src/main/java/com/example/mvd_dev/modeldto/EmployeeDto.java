@@ -9,9 +9,9 @@ import javax.validation.constraints.NotBlank;
 public class EmployeeDto {
     private long idEmployee;
 
-    private long departmentId; // ID отдела
+    private long departmentId;
 
-    private long userId; // ID пользователя
+    private long userId;
 
     @NotBlank(message = "Name cannot be empty")
     private String name;

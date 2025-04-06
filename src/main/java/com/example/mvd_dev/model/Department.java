@@ -16,12 +16,12 @@ public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_department") // Изменено на snake_case
+    @Column(name = "id_department")
     private long idDepartment;
 
-    @Column(name = "name") // Изменено на snake_case
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "address") // Изменено на snake_case
+    @Column(name = "address")
     private String address;
 }

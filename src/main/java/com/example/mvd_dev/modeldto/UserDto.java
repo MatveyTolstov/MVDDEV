@@ -1,5 +1,6 @@
 package com.example.mvd_dev.modeldto;
 
+import com.example.mvd_dev.model.Role;
 import lombok.*;
 import javax.validation.constraints.NotBlank;
 
@@ -15,5 +16,13 @@ public class UserDto {
     @NotBlank(message = "Password cannot be empty")
     private String password;
 
-    private long roleId; // ID роли
+    private long roleId;
+
+    public Role getRole() {
+        return null;
+    }
+
+    public void setRole(Role role) {
+
+    }
 }

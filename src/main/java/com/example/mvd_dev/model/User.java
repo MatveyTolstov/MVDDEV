@@ -16,17 +16,17 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user") // Изменено на snake_case
+    @Column(name = "id_user")
     private long idUser ;
 
-    @Column(name = "number") // Изменено на snake_case
+    @Column(name = "number")
     private String number;
 
-    @Column(name = "password") // Изменено на snake_case
+    @Column(name = "password")
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "id_role") // Изменено на snake_case
+    @JoinColumn(name = "role_id", referencedColumnName = "id_role")
     private Role role;
 
     public long getRoleId() {

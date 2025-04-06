@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Positive;
 import java.sql.Date;
 
 @Entity
@@ -16,29 +17,44 @@ public class Application {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_application") // Изменено на snake_case
+    @Column(name = "id_application")
     private long idApplication;
 
-    @Column(name = "name_application") // Изменено на snake_case
+    @Column(name = "name_application")
     private String nameApplication;
 
-    @Column(name = "description") // Изменено на snake_case
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "status") // Изменено на snake_case
+    @Column(name = "status")
     private String status;
 
-    @Column(name = "submission_date") // Изменено на snake_case
+    @Column(name = "submission_date")
     private Date submissionDate;
 
-    @Column(name = "completion_date") // Изменено на snake_case
+    @Column(name = "completion_date")
     private Date completionDate;
 
     @ManyToOne
-    @JoinColumn(name = "citizen_id", referencedColumnName = "id_citizen") // Изменено на snake_case
+    @JoinColumn(name = "citizen_id", referencedColumnName = "id_citizen")
     private Citizen citizen;
 
     @ManyToOne
-    @JoinColumn(name = "id_document_type", referencedColumnName = "document_type_id") // Изменено на snake_case
+    @JoinColumn(name = "id_document_type", referencedColumnName = "document_type_id")
     private DocumentType documentType;
+
+    public void setCitizenId(@Positive(message = "Citizen ID must be positive") long citizenId) {
+    }
+
+    public @Positive(message = "Citizen ID must be positive") long getCitizenId() {
+        return 0;
+    }
+
+    public void setDocumentTypeId(long documentTypeId) {
+
+    }
+
+    public @Positive(message = "Document Type ID must be positive") long getDocumentTypeId() {
+        return 0;
+    }
 }

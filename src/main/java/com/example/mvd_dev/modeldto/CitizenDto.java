@@ -18,5 +18,5 @@ public class CitizenDto {
     @NotBlank(message = "Midname cannot be empty")
     private String midname;
 
-    private long userId; // ID пользователя
+    private long userId;
 }
