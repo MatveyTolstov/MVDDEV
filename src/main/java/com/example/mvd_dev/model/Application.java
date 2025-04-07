@@ -44,17 +44,20 @@ public class Application {
     private DocumentType documentType;
 
     public void setCitizenId(@Positive(message = "Citizen ID must be positive") long citizenId) {
+        this.citizen = new Citizen();
+        this.citizen.setIdCitizen(citizenId);
     }
 
     public @Positive(message = "Citizen ID must be positive") long getCitizenId() {
-        return 0;
+        return citizen != null ? citizen.getIdCitizen() : 0;
     }
 
     public void setDocumentTypeId(long documentTypeId) {
-
+        this.documentType = new DocumentType();
+        this.documentType.setDocumentTypeId(documentTypeId);
     }
 
     public @Positive(message = "Document Type ID must be positive") long getDocumentTypeId() {
-        return 0;
+        return documentType != null ? documentType.getDocumentTypeId() : 0;
     }
 }
