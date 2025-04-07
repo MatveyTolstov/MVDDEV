@@ -1,7 +1,6 @@
 package com.example.mvd_dev.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,10 +8,15 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
+@Table(name = "roles")
 public class Role {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_role")
     private long idRole;
 
+    @Column(name = "role_name")
     public String roleName;
 
     public Role(String roleName) {

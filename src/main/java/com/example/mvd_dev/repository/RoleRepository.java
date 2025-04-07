@@ -13,6 +13,6 @@ import java.util.Optional;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
-    //TODO: сделать запрос на поиск по названию
+    @Query("select r from Role r where r.roleName =:roleName")
     Optional<Role> findRoleByRoleName(String roleName);
 }

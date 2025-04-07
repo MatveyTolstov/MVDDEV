@@ -17,8 +17,10 @@ public class DocumentType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "document_type_id")
     private long documentTypeId;
 
+    @Column(name = "document_type")
     private String documentType;
 
 

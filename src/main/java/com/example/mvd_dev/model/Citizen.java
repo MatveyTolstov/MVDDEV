@@ -14,11 +14,12 @@ public class Citizen extends UserFIO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_citizen")
     private long idCitizen;
 
     @OneToOne
-    @JoinColumn(name = "userId", referencedColumnName = "idUser ")
+    @JoinColumn(name = "user_id", referencedColumnName = "id_user")
     private User user;
 
-    // Другие поля и методы, если необходимо
+
 }

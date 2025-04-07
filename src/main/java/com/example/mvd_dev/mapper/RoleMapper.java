@@ -24,4 +24,5 @@ public class RoleMapper {
         roleDto.setRoleName(role.getRoleName());
         return roleDto;
     }
+
 }
