@@ -27,9 +27,8 @@ public class Role {
         this.roleName = roleName;
     }
 
-    //тут костыль с ролью, почему то в других местах нельзя вызвать name()
-    public String getRoleNameString() {  // Возвращаемый тип — Roles, а не Enum
-        return this.roleName.name();
+    public Roles getRoleNameString() {
+        return this.roleName;
     }
 
 }
