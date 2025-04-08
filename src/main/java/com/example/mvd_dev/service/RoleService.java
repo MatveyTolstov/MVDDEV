@@ -5,7 +5,6 @@ import com.example.mvd_dev.model.Role;
 import com.example.mvd_dev.model.Roles;
 import com.example.mvd_dev.modeldto.RoleDto;
 import com.example.mvd_dev.repository.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
