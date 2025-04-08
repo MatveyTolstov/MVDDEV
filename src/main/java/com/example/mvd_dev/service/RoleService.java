@@ -2,6 +2,7 @@ package com.example.mvd_dev.service;
 
 import com.example.mvd_dev.mapper.RoleMapper;
 import com.example.mvd_dev.model.Role;
+import com.example.mvd_dev.model.Roles;
 import com.example.mvd_dev.modeldto.RoleDto;
 import com.example.mvd_dev.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ public class RoleService {
     }
 
     public Role findByRoleName(String roleName) {
-        return _roleRepository.findRoleByRoleName(roleName)
+        var roleEnum = Roles.valueOf(roleName);
+        return _roleRepository.findRoleByRoleName(roleEnum)
                 .orElse(null);
     }
 
@@ -44,7 +46,8 @@ public class RoleService {
 
     public Role update(RoleDto role, long id) {
         var existingRole = _roleRepository.findById(id).orElse(null);
-        existingRole.setRoleName(role.getRoleName());
+        var newRole = _roleMapper.toEntity(role);
+        existingRole.setRoleName(newRole.getRoleName());
 
         return _roleRepository.save(existingRole);
     }

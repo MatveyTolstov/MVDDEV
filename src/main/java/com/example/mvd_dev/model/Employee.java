@@ -23,7 +23,7 @@ public class Employee extends UserFIO {
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id_user", nullable = false)
-    private User user;
+    private UserEntity user;
 
 
 }

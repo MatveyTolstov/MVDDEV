@@ -16,13 +16,8 @@ public class UserDto {
     @NotBlank(message = "Password cannot be empty")
     private String password;
 
+    @NotBlank(message = "Login cannot be empty")
+    private String login;
+
     private long roleId;
-
-    public Role getRole() {
-        return null;
-    }
-
-    public void setRole(Role role) {
-
-    }
 }

@@ -19,7 +19,7 @@ public class Citizen extends UserFIO {
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id_user")
-    private User user;
+    private UserEntity user;
 
 
 }

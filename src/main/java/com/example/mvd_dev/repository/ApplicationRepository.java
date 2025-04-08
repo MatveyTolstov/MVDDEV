@@ -12,8 +12,7 @@ import java.util.List;
  */
 @Repository
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
-
-    @Query("SELECT a FROM Application a WHERE a.status = :status")
+    
     List<Application> findApplicationsByStatus(String status);
 
 

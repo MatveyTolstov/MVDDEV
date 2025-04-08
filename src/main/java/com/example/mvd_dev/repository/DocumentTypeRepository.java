@@ -13,6 +13,5 @@ import java.util.Optional;
 @Repository
 public interface DocumentTypeRepository extends JpaRepository<DocumentType, Long> {
 
-    @Query("SELECT d FROM DocumentType d WHERE d.documentType = :documentType")
     Optional<DocumentType> findByDocumentType(String documentType);
 }
