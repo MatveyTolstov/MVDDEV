@@ -4,6 +4,9 @@ import com.example.mvd_dev.model.Application;
 import com.example.mvd_dev.modeldto.ApplicationDto;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class ApplicationMapper {
 
@@ -12,6 +15,7 @@ public class ApplicationMapper {
             return null;
         }
         Application application = new Application();
+
         application.setStatus(applicationDto.getStatus());
         application.setCitizenId(applicationDto.getCitizenId());
         application.setNameApplication(applicationDto.getNameApplication());
@@ -27,6 +31,7 @@ public class ApplicationMapper {
             return null;
         }
         ApplicationDto applicationDto = new ApplicationDto();
+        applicationDto.setIdApplication(application.getIdApplication());
         applicationDto.setStatus(application.getStatus());
         applicationDto.setCitizenId(application.getCitizenId());
         applicationDto.setNameApplication(application.getNameApplication());
@@ -35,5 +40,14 @@ public class ApplicationMapper {
         applicationDto.setCompletionDate(application.getCompletionDate());
         applicationDto.setDocumentTypeId(application.getDocumentTypeId());
         return applicationDto;
+    }
+
+    public List<ApplicationDto> toDtoList(List<Application> applications) {
+        if (applications == null) {
+            return null;
+        }
+        return applications.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
     }
 }

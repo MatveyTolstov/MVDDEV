@@ -1,6 +1,7 @@
 package com.example.mvd_dev.mapper;
 
 import com.example.mvd_dev.model.Citizen;
+import com.example.mvd_dev.model.UserEntity;
 import com.example.mvd_dev.modeldto.CitizenDto;
 import org.springframework.stereotype.Component;
 
@@ -12,8 +13,10 @@ public class CitizenMapper {
             return null;
         }
         Citizen citizen = new Citizen();
+        citizen.setIdCitizen(citizenDto.getIdCitizen());
         citizen.setName(citizenDto.getName());
         citizen.setSurname(citizenDto.getSurname());
+        citizenDto.setUserId(citizen.getUser ().getIdUser ());
         return citizen;
     }
 
@@ -22,8 +25,10 @@ public class CitizenMapper {
             return null;
         }
         CitizenDto citizenDto = new CitizenDto();
+        citizenDto.setIdCitizen(citizen.getIdCitizen());
         citizenDto.setName(citizen.getName());
         citizenDto.setSurname(citizen.getSurname());
+        citizenDto.setUserId(citizen.getUser ().getIdUser ());
         return citizenDto;
     }
 }
