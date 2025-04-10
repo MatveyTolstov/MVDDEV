@@ -30,8 +30,8 @@ public class RoleController {
 
     // Получить роль по имени
     @GetMapping("/{roleName}")
-    public ResponseEntity<Role> getRoleByName(@PathVariable String roleName) {
-        Role role = roleService.findByRoleName(roleName);
+    public ResponseEntity<RoleDto> getRoleByName(@PathVariable String roleName) {
+        var role = roleService.findByRoleName(roleName);
         return ResponseEntity.ok(role);
     }
 
