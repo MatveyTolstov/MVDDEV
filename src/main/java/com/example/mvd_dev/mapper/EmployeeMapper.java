@@ -12,8 +12,11 @@ public class EmployeeMapper {
             return null;
         }
         Employee employee = new Employee();
+        employee.setIdEmployee(employeeDto.getIdEmployee());
         employee.setName(employeeDto.getName());
         employee.setSurname(employeeDto.getSurname());
+        employee.setMidname(employeeDto.getMidname());
+
         return employee;
     }
 
@@ -22,8 +25,12 @@ public class EmployeeMapper {
             return null;
         }
         EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setIdEmployee(employee.getIdEmployee());
+        employeeDto.setDepartmentId(employee.getDepartment() != null ? employee.getDepartment().getIdDepartment() : null);
+        employeeDto.setUserId(employee.getUser () != null ? employee.getUser ().getIdUser () : null);
         employeeDto.setName(employee.getName());
         employeeDto.setSurname(employee.getSurname());
+        employeeDto.setMidname(employee.getMidname());
         return employeeDto;
     }
 }
