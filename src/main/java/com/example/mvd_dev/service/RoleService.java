@@ -5,24 +5,23 @@ import com.example.mvd_dev.model.Role;
 import com.example.mvd_dev.model.Roles;
 import com.example.mvd_dev.modeldto.RoleDto;
 import com.example.mvd_dev.repository.RoleRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class RoleService {
     private final RoleRepository _roleRepository;
     private final RoleMapper _roleMapper;
 
-    public RoleService(RoleRepository roleCrudRepository, RoleMapper roleMapper) {
-        _roleRepository = roleCrudRepository;
-        _roleMapper = roleMapper;
-    }
 
-    public Role findByRoleName(String roleName) {
+    public RoleDto findByRoleName(String roleName) {
         var roleEnum = Roles.valueOf(roleName);
-        return _roleRepository.findRoleByRoleName(roleEnum)
-                .orElse(null);
+        var role = _roleRepository.findRoleByRoleName(roleEnum).orElseThrow(() -> new NullPointerException("Такой роли нету!"));
+
+        return _roleMapper.toDto(role);
     }
 
     public Role findByIdRole(long id) {

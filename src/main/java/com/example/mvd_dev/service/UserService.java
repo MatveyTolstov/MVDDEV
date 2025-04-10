@@ -1,11 +1,16 @@
 package com.example.mvd_dev.service;
 
+import com.example.mvd_dev.exception.UserAlreadyExistsException;
+import com.example.mvd_dev.exception.UserNotFoundException;
 import com.example.mvd_dev.mapper.UserMapper;
 import com.example.mvd_dev.modeldto.UserDto;
 import com.example.mvd_dev.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -14,17 +19,12 @@ public class UserService {
     private final UserMapper userMapper;
 
     public UserDto save(UserDto userDto) {
-
         if (userRepository.existsByLogin(userDto.getLogin())) {
-            throw new RuntimeException("Такой логин уже есть!");
+            throw new UserAlreadyExistsException("Такой логин уже есть!");
         }
 
         if (userRepository.existsByNumber(userDto.getNumber())) {
-            throw new RuntimeException("Такой номер телефона уже есть");
-        }
-
-        if (userDto != null) {
-            throw new RuntimeException("Пользователь не может быть пустым!");
+            throw new UserAlreadyExistsException("Такой номер телефона уже есть");
         }
 
         var user = userMapper.toEntity(userDto);
@@ -33,16 +33,14 @@ public class UserService {
     }
 
     public UserDto findById(Long id) {
-        if (userRepository.findById(id).isPresent()) {
-            return userMapper.toDto(userRepository.findById(id).get());
-        }
-
-        throw new RuntimeException("Такого пользователя нету");
+        return userRepository.findById(id)
+                .map(userMapper::toDto)
+                .orElseThrow(() -> new UserNotFoundException("Такого пользователя нету"));
     }
 
     public UserDto update(long id, UserDto userDto) {
         var userCurrent = userRepository.findById(id)
-                .orElseThrow(() -> new NullPointerException("Такого пользователя нету"));
+                .orElseThrow(() -> new UserNotFoundException("Такого пользователя нету"));
 
         userCurrent.setRoleId(userDto.getRoleId());
         userCurrent.setLogin(userDto.getLogin());
@@ -50,20 +48,27 @@ public class UserService {
         userCurrent.setNumber(userDto.getNumber());
 
         return userMapper.toDto(userRepository.save(userCurrent));
-
     }
 
     public void delete(long id) {
         var userCurrent = userRepository.findById(id)
-                .orElseThrow(() -> new NullPointerException("Такого пользователя нету"));
+                .orElseThrow(() -> new UserNotFoundException("Такого пользователя нету"));
 
         userRepository.delete(userCurrent);
     }
 
     public UserDetails existByLogin(String login) {
-        return userRepository.findByLogin(login).orElseThrow(() -> new NullPointerException("Пользователь с именем \" + login + \" не найден"));
-
+        return userRepository.findByLogin(login)
+                .orElseThrow(() -> new UserNotFoundException("Пользователь с именем \"" + login + "\" не найден"));
     }
 
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAll().stream().map(userMapper::toDto).collect(Collectors.toList());
+    }
+
+    public String getUserRole(long id) {
+        return userRepository.getUserRoleNameById(id)
+                .orElseThrow(() -> new UserNotFoundException("Такого пользователя нету"));
+    }
 
 }

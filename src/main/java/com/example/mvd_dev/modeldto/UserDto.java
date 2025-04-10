@@ -8,8 +8,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
-    private long idUser ;
-
     @NotBlank(message = "Number cannot be empty")
     private String number;
 
