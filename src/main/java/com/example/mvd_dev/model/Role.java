@@ -19,16 +19,12 @@ public class Role {
     @Column(name = "id_role")
     private long idRole;
 
-    @Enumerated(EnumType.STRING)
+    @Getter
     @Column(name = "role_name")
-    private Roles roleName;
+    private String roleName;
 
-    public Role(Roles roleName) {
+    public Role(String roleName) {
         this.roleName = roleName;
-    }
-
-    public Roles getRoleNameString() {
-        return this.roleName;
     }
 
 }

@@ -4,6 +4,7 @@ import com.example.mvd_dev.modeldto.UserDto;
 import com.example.mvd_dev.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("users")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<List<UserDto>> getUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }

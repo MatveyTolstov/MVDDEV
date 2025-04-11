@@ -26,10 +26,10 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
                 request.getRequestURI()
         );
 
-        response.setContentType("application/json");
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        response.getWriter().write(objectMapper.writeValueAsString(errorResponse));
+
+
+        response.getWriter().write(errorResponse.toString());
     }
 }
 

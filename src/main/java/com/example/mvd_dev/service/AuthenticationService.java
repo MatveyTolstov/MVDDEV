@@ -1,7 +1,6 @@
 package com.example.mvd_dev.service;
 
 import com.example.mvd_dev.model.Role;
-import com.example.mvd_dev.model.Roles;
 import com.example.mvd_dev.model.Token;
 import com.example.mvd_dev.model.UserEntity;
 import com.example.mvd_dev.modeldto.AuthenticationResponseDto;
@@ -18,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,10 +42,10 @@ public class AuthenticationService {
 
     public void register(SignUpRequest request) {
 
-        Role role = roleRepository.findRoleByRoleName(Roles.ROLE_USER)
+        Role role = roleRepository.findRoleByRoleName("ROLE_USER")
                 .orElseGet(() -> {
                     Role newRole = new Role();
-                    newRole.setRoleName(Roles.ROLE_USER);
+                    newRole.setRoleName("ROLE_USER");
                     return roleRepository.save(newRole);
                 });
 

@@ -18,9 +18,12 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
+
+    private final String USER_ALREADY_EXCEPTION = "Такой логин уже есть!";
+
     public UserDto save(UserDto userDto) {
         if (userRepository.existsByLogin(userDto.getLogin())) {
-            throw new UserAlreadyExistsException("Такой логин уже есть!");
+            throw new UserAlreadyExistsException(USER_ALREADY_EXCEPTION);
         }
 
         if (userRepository.existsByNumber(userDto.getNumber())) {
@@ -35,12 +38,12 @@ public class UserService {
     public UserDto findById(Long id) {
         return userRepository.findById(id)
                 .map(userMapper::toDto)
-                .orElseThrow(() -> new UserNotFoundException("Такого пользователя нету"));
+                .orElseThrow(() -> new UserNotFoundException(USER_ALREADY_EXCEPTION));
     }
 
     public UserDto update(long id, UserDto userDto) {
         var userCurrent = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Такого пользователя нету"));
+                .orElseThrow(() -> new UserNotFoundException(USER_ALREADY_EXCEPTION));
 
         userCurrent.setRoleId(userDto.getRoleId());
         userCurrent.setLogin(userDto.getLogin());
@@ -52,7 +55,7 @@ public class UserService {
 
     public void delete(long id) {
         var userCurrent = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Такого пользователя нету"));
+                .orElseThrow(() -> new UserNotFoundException(USER_ALREADY_EXCEPTION));
 
         userRepository.delete(userCurrent);
     }

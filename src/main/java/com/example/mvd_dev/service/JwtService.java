@@ -109,6 +109,7 @@ public class JwtService {
     private String generateToken(UserEntity user, long expiryTime) {
         JwtBuilder builder = Jwts.builder()
                 .subject(user.getUsername())
+                .claim("role", user.getRole().getRoleName())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expiryTime))
                 .signWith(getSgningKey());

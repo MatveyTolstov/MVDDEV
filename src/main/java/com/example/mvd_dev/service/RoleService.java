@@ -2,7 +2,6 @@ package com.example.mvd_dev.service;
 
 import com.example.mvd_dev.mapper.RoleMapper;
 import com.example.mvd_dev.model.Role;
-import com.example.mvd_dev.model.Roles;
 import com.example.mvd_dev.modeldto.RoleDto;
 import com.example.mvd_dev.repository.RoleRepository;
 import lombok.AllArgsConstructor;
@@ -18,8 +17,7 @@ public class RoleService {
 
 
     public RoleDto findByRoleName(String roleName) {
-        var roleEnum = Roles.valueOf(roleName);
-        var role = _roleRepository.findRoleByRoleName(roleEnum).orElseThrow(() -> new NullPointerException("Такой роли нету!"));
+        var role = _roleRepository.findRoleByRoleName(roleName).orElseThrow(() -> new NullPointerException("Такой роли нету!"));
 
         return _roleMapper.toDto(role);
     }
@@ -42,12 +40,12 @@ public class RoleService {
         return _roleRepository.save(role);
     }
 
-    public Role update(RoleDto role, long id) {
-        var existingRole = _roleRepository.findById(id).orElse(null);
-        var newRole = _roleMapper.toEntity(role);
-        existingRole.setRoleName(newRole.getRoleName());
-
-        return _roleRepository.save(existingRole);
-    }
+//    public Role update(RoleDto role, long id) {
+//        var existingRole = _roleRepository.findById(id).orElse(null);
+//        var newRole = _roleMapper.toEntity(role);
+//        existingRole.setRoleName(newRole.getRoleName());
+//
+//        return _roleRepository.save(existingRole);
+//    }
 
 }

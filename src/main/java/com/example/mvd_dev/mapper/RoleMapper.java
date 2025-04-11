@@ -1,7 +1,6 @@
 package com.example.mvd_dev.mapper;
 
 import com.example.mvd_dev.model.Role;
-import com.example.mvd_dev.model.Roles;
 import com.example.mvd_dev.modeldto.RoleDto;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +11,9 @@ public class RoleMapper {
         if (roleDto == null) {
             return null;
         }
-        var rolesEnum = Roles.valueOf(roleDto.getRoleName());
 
         Role role = new Role();
-        role.setRoleName(rolesEnum);
+        role.setRoleName(role.getRoleName());
         return role;
     }
 
@@ -25,7 +23,7 @@ public class RoleMapper {
         }
         RoleDto roleDto = new RoleDto();
 
-        roleDto.setRoleName(role.getRoleName().name());
+        roleDto.setRoleName(role.getRoleName());
         return roleDto;
     }
 

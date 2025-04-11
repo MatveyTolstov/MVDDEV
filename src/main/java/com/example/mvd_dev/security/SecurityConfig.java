@@ -41,10 +41,10 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
 
         http.authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/singin/**", "/registration/**", "/css/**", "/refresh_token/**", "/", "/roles/**", "user/**")
+                    auth.requestMatchers("/singin/**", "/registration/**", "/css/**", "/refresh_token/**", "/", "/roles/**")
                             .permitAll();
                     auth.requestMatchers("/admin/**").hasAuthority("ADMIN");
-                    auth.requestMatchers("/user/**", "user/create").hasAuthority("USER");
+                    auth.requestMatchers("/user/**", "user/create", "users").hasAuthority("ROLE_USER");
                     auth.anyRequest().authenticated();
                 })
                 .userDetailsService(userService)
