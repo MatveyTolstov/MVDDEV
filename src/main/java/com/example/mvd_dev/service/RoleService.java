@@ -40,12 +40,12 @@ public class RoleService {
         return _roleRepository.save(role);
     }
 
-//    public Role update(RoleDto role, long id) {
-//        var existingRole = _roleRepository.findById(id).orElse(null);
-//        var newRole = _roleMapper.toEntity(role);
-//        existingRole.setRoleName(newRole.getRoleName());
-//
-//        return _roleRepository.save(existingRole);
-//    }
+    public Role update(RoleDto role, long id) {
+        var existingRole = _roleRepository.findById(id).orElse(null);
+        var newRole = _roleMapper.toEntity(role);
+        existingRole.setRoleName(newRole.getRoleName());
+
+        return _roleRepository.save(existingRole);
+    }
 
 }

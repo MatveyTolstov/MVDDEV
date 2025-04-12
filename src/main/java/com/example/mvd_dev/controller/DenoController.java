@@ -15,7 +15,6 @@ public class DenoController {
     }
 
     @GetMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> helloA() {
 
         return ResponseEntity.ok("Hello Admin");
