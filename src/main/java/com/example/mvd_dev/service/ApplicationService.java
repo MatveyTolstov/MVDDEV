@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.example.mvd_dev.service.ErrorMessages.*;
+
 @Service
 @AllArgsConstructor
 public class ApplicationService {
@@ -30,12 +32,12 @@ public class ApplicationService {
     public ApplicationDto findById(Long id) {
         return applicationRepository.findById(id)
                 .map(applicationMapper::toDto)
-                .orElseThrow(() -> new RuntimeException("Заявление не найдено"));
+                .orElseThrow(() -> new RuntimeException(APPLICATION_NOT_FOUND));
     }
 
     public ApplicationDto update(long id, ApplicationDto applicationDto) {
         var existingApplication = applicationRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Заявление не найдено"));
+                .orElseThrow(() -> new RuntimeException(APPLICATION_NOT_FOUND));
 
         existingApplication.setCompletionDate(applicationDto.getCompletionDate());
         existingApplication.setDescription(applicationDto.getDescription());
@@ -48,7 +50,7 @@ public class ApplicationService {
 
     public void delete(long id) {
         var existingApplication = applicationRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Заявление не найдено"));
+                .orElseThrow(() -> new RuntimeException(APPLICATION_NOT_FOUND));
 
         applicationRepository.delete(existingApplication);
     }
@@ -60,14 +62,14 @@ public class ApplicationService {
 
     public List<ApplicationDto> findApplicationsByCitizenId(Long citizenId) {
         Citizen citizen = citizenRepository.findById(citizenId)
-                .orElseThrow(() -> new RuntimeException("Гражданин не найден"));
+                .orElseThrow(() -> new RuntimeException(CITIZEN_NOT_FOUND));
         return applicationMapper.toDtoList(applicationRepository.findApplicationsByCitizen(citizen));
     }
 
 
     public List<ApplicationDto> findApplicationsByDocumentTypeId(Long documentTypeId) {
         DocumentType documentType = documentTypeRepository.findById(documentTypeId)
-                .orElseThrow(() -> new RuntimeException("Тип документа не найден"));
+                .orElseThrow(() -> new RuntimeException(DOCUMENT_TYPE_NOT_FOUND));
         return applicationMapper.toDtoList(applicationRepository.findApplicationsByDocumentType(documentType));
     }
 

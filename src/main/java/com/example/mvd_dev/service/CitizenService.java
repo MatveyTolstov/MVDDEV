@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.mvd_dev.service.ErrorMessages.CITIZEN_NOT_FOUND;
+
 @Service
 @AllArgsConstructor
 public class CitizenService {
@@ -25,7 +27,7 @@ public class CitizenService {
     public CitizenDto findById(Long id) {
         return citizenRepository.findById(id)
                 .map(citizenMapper::toDto)
-                .orElseThrow(() -> new RuntimeException("Гражданин не найден"));
+                .orElseThrow(() -> new RuntimeException(CITIZEN_NOT_FOUND));
     }
 
     public List<CitizenDto> findAll() {
@@ -36,7 +38,7 @@ public class CitizenService {
 
     public CitizenDto update(Long id, CitizenDto citizenDto) {
         Citizen existingCitizen = citizenRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Гражданин не найден"));
+                .orElseThrow(() -> new RuntimeException(CITIZEN_NOT_FOUND));
 
         existingCitizen.setName(citizenDto.getName());
         existingCitizen.setSurname(citizenDto.getSurname());
@@ -47,7 +49,7 @@ public class CitizenService {
 
     public void delete(Long id) {
         Citizen existingCitizen = citizenRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Гражданин не найден"));
+                .orElseThrow(() -> new RuntimeException(CITIZEN_NOT_FOUND));
         citizenRepository.delete(existingCitizen);
     }
 }

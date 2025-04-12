@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.mvd_dev.service.ErrorMessages.DOCUMENT_TYPE_NOT_FOUND;
+
 @Service
 @AllArgsConstructor
 public class DocumentTypeService {
@@ -25,7 +27,7 @@ public class DocumentTypeService {
     public DocumentTypeDto findById(Long id) {
         return documentTypeRepository.findById(id)
                 .map(documentTypeMapper::toDto)
-                .orElseThrow(() -> new RuntimeException("Document type not found"));
+                .orElseThrow(() -> new RuntimeException(DOCUMENT_TYPE_NOT_FOUND));
     }
 
     public List<DocumentTypeDto> findAll() {
@@ -36,7 +38,7 @@ public class DocumentTypeService {
 
     public DocumentTypeDto update(Long id, DocumentTypeDto documentTypeDto) {
         DocumentType existingDocumentType = documentTypeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Document type not found"));
+                .orElseThrow(() -> new RuntimeException(DOCUMENT_TYPE_NOT_FOUND));
 
         existingDocumentType.setDocumentType(documentTypeDto.getDocumentType());
 
@@ -45,7 +47,7 @@ public class DocumentTypeService {
 
     public void delete(Long id) {
         DocumentType existingDocumentType = documentTypeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Document type not found"));
+                .orElseThrow(() -> new RuntimeException(DOCUMENT_TYPE_NOT_FOUND));
         documentTypeRepository.delete(existingDocumentType);
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.mvd_dev.service.ErrorMessages.DEPARTMENT_NOT_FOUND;
+
 @Service
 @AllArgsConstructor
 public class DepartmentService {
@@ -25,7 +27,7 @@ public class DepartmentService {
     public DepartmentDto findById(Long id) {
         return departmentRepository.findById(id)
                 .map(departmentMapper::toDto)
-                .orElseThrow(() -> new RuntimeException("Department not found"));
+                .orElseThrow(() -> new RuntimeException(DEPARTMENT_NOT_FOUND));
     }
 
     public List<DepartmentDto> findAll() {
@@ -36,7 +38,7 @@ public class DepartmentService {
 
     public DepartmentDto update(Long id, DepartmentDto departmentDto) {
         Department existingDepartment = departmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Department not found"));
+                .orElseThrow(() -> new RuntimeException(DEPARTMENT_NOT_FOUND));
 
         existingDepartment.setName(departmentDto.getName());
         existingDepartment.setAddress(departmentDto.getAddress());
@@ -46,7 +48,7 @@ public class DepartmentService {
 
     public void delete(Long id) {
         Department existingDepartment = departmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Department not found"));
+                .orElseThrow(() -> new RuntimeException(DEPARTMENT_NOT_FOUND));
         departmentRepository.delete(existingDepartment);
     }
 }

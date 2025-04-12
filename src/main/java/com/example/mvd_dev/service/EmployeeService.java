@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.mvd_dev.service.ErrorMessages.EMPLOYEE_NOT_FOUND;
+
 @Service
 @AllArgsConstructor
 public class EmployeeService {
@@ -25,7 +27,7 @@ public class EmployeeService {
     public EmployeeDto findById(Long id) {
         return employeeRepository.findById(id)
                 .map(employeeMapper::toDto)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+                .orElseThrow(() -> new RuntimeException(EMPLOYEE_NOT_FOUND));
     }
 
     public List<EmployeeDto> findAll() {
@@ -36,7 +38,7 @@ public class EmployeeService {
 
     public EmployeeDto update(Long id, EmployeeDto employeeDto) {
         Employee existingEmployee = employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+                .orElseThrow(() -> new RuntimeException(EMPLOYEE_NOT_FOUND));
 
         existingEmployee.setName(employeeDto.getName());
         existingEmployee.setSurname(employeeDto.getSurname());
@@ -45,7 +47,7 @@ public class EmployeeService {
 
     public void delete(Long id) {
         Employee existingEmployee = employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+                .orElseThrow(() -> new RuntimeException(EMPLOYEE_NOT_FOUND));
         employeeRepository.delete(existingEmployee);
     }
 
