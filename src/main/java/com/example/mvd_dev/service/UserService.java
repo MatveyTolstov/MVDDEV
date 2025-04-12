@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import static com.example.mvd_dev.service.ErrorMessages.*;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -16,15 +18,15 @@ public class UserService {
     public UserDto save(UserDto userDto) {
 
         if (userRepository.existsByLogin(userDto.getLogin())) {
-            throw new RuntimeException("Такой логин уже есть!");
+            throw new RuntimeException(LOGIN_ALREADY_EXISTS);
         }
 
         if (userRepository.existsByNumber(userDto.getNumber())) {
-            throw new RuntimeException("Такой номер телефона уже есть");
+            throw new RuntimeException(PHONE_NUMBER_ALREADY_EXISTS);
         }
 
         if (userDto != null) {
-            throw new RuntimeException("Пользователь не может быть пустым!");
+            throw new RuntimeException(USER_CANNOT_BE_NULL);
         }
 
         var user = userMapper.toEntity(userDto);
@@ -37,12 +39,12 @@ public class UserService {
             return userMapper.toDto(userRepository.findById(id).get());
         }
 
-        throw new RuntimeException("Такого пользователя нету");
+        throw new RuntimeException(USER_NOT_FOUND);
     }
 
     public UserDto update(long id, UserDto userDto) {
         var userCurrent = userRepository.findById(id)
-                .orElseThrow(() -> new NullPointerException("Такого пользователя нету"));
+                .orElseThrow(() -> new NullPointerException(USER_NOT_FOUND));
 
         userCurrent.setRoleId(userDto.getRoleId());
         userCurrent.setLogin(userDto.getLogin());
@@ -55,7 +57,7 @@ public class UserService {
 
     public void delete(long id) {
         var userCurrent = userRepository.findById(id)
-                .orElseThrow(() -> new NullPointerException("Такого пользователя нету"));
+                .orElseThrow(() -> new NullPointerException(USER_NOT_FOUND));
 
         userRepository.delete(userCurrent);
     }
