@@ -12,6 +12,7 @@ public class DocumentTypeMapper {
             return null;
         }
         DocumentType documentType = new DocumentType();
+        documentType.setDocumentTypeId(documentTypeDto.getDocumentTypeId());
         documentType.setDocumentType(documentTypeDto.getDocumentType());
         return documentType;
     }
@@ -21,6 +22,7 @@ public class DocumentTypeMapper {
             return null;
         }
         DocumentTypeDto documentTypeDto = new DocumentTypeDto();
+        documentTypeDto.setDocumentTypeId(documentType.getDocumentTypeId());
         documentTypeDto.setDocumentType(documentType.getDocumentType());
         return documentTypeDto;
     }

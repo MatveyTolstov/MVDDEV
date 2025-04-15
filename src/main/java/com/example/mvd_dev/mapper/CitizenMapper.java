@@ -12,8 +12,10 @@ public class CitizenMapper {
             return null;
         }
         Citizen citizen = new Citizen();
+        citizen.setIdCitizen(citizenDto.getIdCitizen());
         citizen.setName(citizenDto.getName());
         citizen.setSurname(citizenDto.getSurname());
+        citizenDto.setUserId(citizen.getUser ().getIdUser ());
         return citizen;
     }
 
@@ -22,8 +24,10 @@ public class CitizenMapper {
             return null;
         }
         CitizenDto citizenDto = new CitizenDto();
+        citizenDto.setIdCitizen(citizen.getIdCitizen());
         citizenDto.setName(citizen.getName());
         citizenDto.setSurname(citizen.getSurname());
+        citizenDto.setUserId(citizen.getUser ().getIdUser ());
         return citizenDto;
     }
 }

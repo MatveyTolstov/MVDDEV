@@ -12,7 +12,9 @@ public class DepartmentMapper {
             return null;
         }
         Department department = new Department();
+        department.setIdDepartment(departmentDto.getIdDepartment());
         department.setName(departmentDto.getName());
+        department.setAddress(departmentDto.getAddress());
         return department;
     }
 
@@ -21,7 +23,9 @@ public class DepartmentMapper {
             return null;
         }
         DepartmentDto departmentDto = new DepartmentDto();
+        departmentDto.setIdDepartment(department.getIdDepartment());
         departmentDto.setName(department.getName());
+        departmentDto.setAddress(department.getAddress());
         return departmentDto;
     }
 }

@@ -23,7 +23,6 @@ public class UserMapper {
             return null;
         }
         UserDto userDto = new UserDto();
-        userDto.setLogin(user.getLogin());
         userDto.setNumber(user.getNumber());
         userDto.setPassword(user.getPassword());
         userDto.setRoleId(user.getRoleId());
